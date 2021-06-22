@@ -1,1 +1,93 @@
-<p>checkout works!</p>
+<div class="container">
+    <div class="voltar" data-toggle="tooltip" data-bs-placement="top"  title="Voltar" (click)="voltar()"> 
+        <img src="../../assets/chevron-left-solid.svg" width="10px" alt="voltar" />      
+    </div>
+    <div class="mt-5 col-md-4 col-sm-12 header">  
+        <img src="../../assets/logo.png" alt="Logo" />             
+    </div>
+    <div class="col-md-5 col-sm-12 mt-5 header">
+        <div class="">
+
+            <h3>Estamos quase lá!</h3>
+            <p>Insira seus dados de pagamento abaixo:</p>
+            
+           
+                <div class="bandeiras">
+                    <p class="text-center">
+                        <img src="../../assets/naster-card.png" alt="Bandeira Mastercard"  title="Bandeira Mastercard"/>
+                        <img src="../../assets/dinners.png" alt="Bandeira Diners Club"  title="Bandeira Diners Club"/>
+                        <img src="../../assets/american.png" alt="Bandeira American Express"  title="Bandeira American Express"/>
+                        <img src="../../assets/visa.png" alt="Bandei Cartão Visa" title="Bandei Cartão Visa"/>
+                        <img src="../../assets/cielo.png" alt="Bandeira Cartão Cielo" title="Bandeira Cartão Cielo"/><br> 
+                        <img src="../../assets/pagamento.png" alt="Imagem pagamento iugu" title="Pagamento iugu"/>
+                    </p>
+                </div>
+
+            
+            <form [formGroup]="formPagamento">
+                <div class="row mt-3">
+                    <div class="col-md-12">
+                        <label>Número do cartão</label>
+                        <input mask="0000 0000 0000 0000" class="mask" formControlName="numCartao" placeholder="0000 0000 0000 0000"/>
+                    </div>
+                </div>
+
+                <div class="row mt-3">
+                    <div class="col-md-6">
+                        <label>Validade</label><br>
+                        <input mask="M0/00" class="mask" formControlName="validade" placeholder="MM/AA"/>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label>CVV</label><br>
+                        <input mask="000" class="mask" formControlName="cvv" placeholder="000"/>
+                    </div>
+                </div>
+
+                <div class="row mt-3">
+                    <div class="col-md-12">
+                        <label>Nome impresso no cartão</label>
+                        <input type="text" class="" formControlName="nomeImpressoCartao" placeholder="Seu nome"/>
+                    </div>
+                </div>
+
+                <div class="row mt-3">
+                    <div class="col-md-12">
+                        <label>CPF</label>
+                        <input mask="000.000.000-00" class="mask" formControlName="cpf"  placeholder="000.000.000-00"/>
+                    </div>
+                </div>
+
+                <div class="row mt-3">
+                    <div class="col-md-12">
+                        <label>Cupom</label>
+                        <input type="text" class="" formControlName="cupom" placeholder="Insira aqui"/>
+                    </div>
+                </div>
+
+                <div class="row mt-3">
+                    <div class="col-md-12">
+                        <label *ngIf="plano === 'parcelado'">Número de Parcelas</label>
+                        <label *ngIf="plano === 'aVista'">Valor À Vista</label>
+                        <select *ngIf="plano === 'parcelado'" class="parcelas" formControlName="parcelamento" placeholder="Selecionar">
+                            <option *ngFor="let parcela of listaParcelas" [ngValue]="parcela">
+                                {{ parcela.numParcelas }} {{ parcela.valorParcela | currency: 'BRL' }}
+                            </option>                          
+                        </select>
+                        <select *ngIf="plano === 'aVista'" class="parcelas" formControlName="aVista" placeholder="Selecionar">                          
+                            <option  >
+                                {{ valorAnual | currency: 'BRL'  }}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                <button type="button" class="btn btn-confirmar mt-5" [disabled]="formPagamento.invalid" (click)="finalizarCompra()">Finalizar pagamento</button>
+                
+                
+            </form>
+        </div>
+
+    </div>
+
+</div>

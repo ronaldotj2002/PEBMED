@@ -1,1 +1,39 @@
-<p>confirmacao works!</p>
+<div class="container">
+    <div class="mt-5 col-md-4 col-sm-12 header">        
+        <img src="../../assets/logo.png" alt="Logo" />   
+        
+        <div class="rounded-circle mt-5 check">
+            <img src="../../assets/check-solid.svg" width="50px" alt="check" />            
+        </div>
+        <p class="text-center mt-5 title">Parabéns!</p>
+        <p class="text-center subtitle">Sua assinatura foi realizada<br> com sucesso.</p>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 col-sm-12 mt-5 header">
+            <div class="box">
+              <div class="row info-confirmacao">
+                  <div class="col-md-4">
+                      <p class="star rounded-circle">
+                          <img src="../../assets/star-regular.svg" width="40px" alt="star" />
+                      </p>
+                  </div>
+                  <div class="col-md-8">
+                      <p class="descricaoPagamento">
+                          Anual | Parcelado <br> R$ 479,90 | 10x R$ 47,99
+                      </p>
+                  </div>
+              </div>
+              <div class="mt-5 dados">
+                  <p><span class="dadosCliente">E-mail</span> <span class="dadosClienteRight">fulano@cicrano.com.br</span></p>
+                  <p><span class="dadosCliente">CPF </span><span class="dadosClienteRight">000.000.000-00</span></p>
+              </div>
+            </div>
+        </div>    
+    
+    </div>
+    <div class="col-md-4 col-sm-12 mt-5 header">
+        <p class="gerenciar">Gerenciar assinatura</p>
+        <button type="button" class="btn btn-voltar-home mt-5 mb-5" (click)="voltarHome()">IR PARA A HOME</button>
+    </div>
+</div>

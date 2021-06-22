@@ -1,0 +1,101 @@
+.container {
+    padding-bottom: 30px;
+    font-family: 'DM Sans';
+}
+
+img {
+    margin: 0 auto;
+    display: block;
+}
+
+.header {
+    margin: 0 auto;
+}
+
+input[type=text] {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    outline:none;
+    padding:10px;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number]  {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    outline:none;
+    padding:10px;
+}
+
+.mask{
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    outline:none;
+    padding:10px;  
+}
+
+.parcelas{
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    outline:none;
+    padding:10px;
+}
+
+.btn-confirmar {
+    background: #181846;
+    color: #fff;
+    padding:20px 80px;
+    border-radius: 50px;
+    margin: 0 auto;
+    display: block;
+    width: 100%;
+}
+
+.voltar {
+    width:30px;
+    height:30px;
+    border-radius: 25px;
+    position: relative;
+    padding-top: 7px;
+    top: 9vh;
+}
+
+.voltar:hover {
+    width:30px;
+    height:30px;
+    border-radius: 25px;
+    position: relative;
+    padding-top: 7px;
+    top: 9vh;
+    background: #f5861f
+}
+
+.bandeiras {
+    margin: 0 auto;
+    display: block;
+}
+.bandeiras img{
+    display: inline;
+    margin: 0;
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color:    #e8e6ee;
+ }
+ 
+ ::-ms-input-placeholder { /* Microsoft Edge */
+    color:    #e8e6ee;
+ }
+
+::placeholder { /* Most modern browsers support this now. */
+    color:    #e8e6ee;
+ }

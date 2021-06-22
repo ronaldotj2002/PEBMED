@@ -20,3 +20,11 @@
 ## Componente Confirmação
     - ng g c confirmacao
 
+## Service
+    - ng g s checkout
+
+
+## Dependencias
+    - npm install --save ngx-mask
+    
+
