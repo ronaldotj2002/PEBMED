@@ -20,6 +20,7 @@ img {
 
 .check img { 
     margin-top: 24px;
+    width: 50px;
 }
 
 .title {   
@@ -89,4 +90,49 @@ img {
     margin: 0 auto;
     display: block;
     width: 100%;
+}
+
+img.img-success {
+    width:50px;
+}
+
+/* Mobile */
+
+@media (max-width:430px) {
+
+    .check {
+        width: 50px;
+        height: 50px;
+        border: 1px solid #efefef;
+        margin: -40px auto;
+    }
+
+    .check img{
+        width:25px;
+        margin-top: 13px;
+    }
+
+    .title {
+        font-size: 20px;
+        font-weight: 400;
+    }
+
+    .subtitle {
+        font-size: 20px;
+        color: #ccc;
+    }
+
+    .descricaoPagamento {
+        text-align: right;
+        margin-top: -9vh;
+    }
+
+    .dados {
+        padding: 0 10px;
+        font-size: 18px;
+    }
+
+    .box{
+        min-height: 280px;        
+    }
 }

@@ -6,27 +6,16 @@
         <span class="fulano">fulano@cicrano.com.br</span>        
     </div>
     <form [formGroup]="selecPlano"> 
-        <div class="row">
+        <div class="row grid-planos" *ngFor="let plano of dadosPlanos">
             <div class="col-md-5 col-sm-12 mt-5 item-plano">
-                <p class="title">Anual | À Vista</p>
-                <p class="valor">De {{ dadosPlanos[1]?.fullPrice | currency: 'BRL' }} | Por {{ descontoAvista | currency: 'BRL' }} 
-                    <span class="desconto">{{ dadosPlanos[1]?.discountPercentage == 0.1 ? '10%' : dadosPlanos[1]?.discountPercentage}}</span> 
-                    <input type="radio" name="formaPagamento" value="aVista" formControlName="formaPagamento" (ngModelChange)="tipoPagamento($event)"/>
+                <p class="title">Anual | {{ plano?.description }}</p>
+                <p class="valor">De {{ plano?.fullPrice | currency: 'BRL' }} | Por {{ plano?.fullPrice - plano?.discountAmmount | currency: 'BRL' }} 
+                    <span class="desconto">{{ plano?.discountPercentage == 0.1 ? '10%' : plano?.discountPercentage}}</span> 
+                    <input type="radio" name="formaPagamento" [value]="plano.installments" formControlName="formaPagamento" (ngModelChange)="tipoPagamento($event)"/>
                 </p>
-                <!-- <p>10x de R$ 43,69/mês</p>           -->
+                <p class="valorParcela" *ngIf="plano?.description == 'Parcelado'">10x de {{ (plano?.fullPrice - plano?.discountAmmount) / 10 | currency: 'BRL' }}</p>
             </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-5 col-sm-12 mt-3 item-plano">
-                <p class="title">Anual | Parcelado</p>
-                <p class="valor">De {{ dadosPlanos[0]?.fullPrice | currency: 'BRL'  }}  | Por {{ descontoParcelado | currency: 'BRL'  }}
-                    <span class="desconto parcelado">{{ dadosPlanos[0]?.discountPercentage == 0.1 ? '10%' : dadosPlanos[0]?.discountPercentage}}</span> 
-                    <input type="radio" name="formaPagamento" value="parcelado" formControlName="formaPagamento" (ngModelChange)="tipoPagamento($event)"/>
-                </p>
-                <p class="valorParcela">10 x de R$ 47,99/mês</p>          
-            </div>
-        </div>
+        </div>    
 
         <div class="col-md-5 col-sm-12 header">
             <p class="text-center mt-2">Sobre a cobrança <span class="info-cobranca" data-toggle="tooltip" data-bs-placement="right" title="Informações sobre a cobrança">?</span></p>

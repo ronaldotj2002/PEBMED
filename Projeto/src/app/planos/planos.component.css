@@ -69,8 +69,6 @@ input[type=radio] {
     border-color: #f5861f;
 }
 
-
-
 .btn-comprar {
     background: #181846;
     color: #fff;
@@ -81,12 +79,52 @@ input[type=radio] {
     width: 100%;
 }
 
-
-
 .valorParcela {
     color: #f5861f;
 }
 
 .parcelado {
     margin-left: 78px;
+}
+
+/* Mobile */
+
+@media (max-width:430px) {
+    .grid-planos {
+        padding: 10px;
+    }
+
+    .fulano {
+        border: 0.5px solid #ccc;
+        color: #49494a;
+        border-radius: 25px;
+        padding: 5px 10px;
+        position: relative;
+        left: 20vw;
+        top: 10px;
+    }
+
+    .desconto{
+        border-radius: 25px;
+        background-color: #f5861f;
+        color: #fff;
+        padding: 3px 10px;
+        position: relative;
+        top: 2vh;
+        left: 36vw;
+    }
+
+    .valorParcela {
+        position: relative;
+        bottom: 3vh;
+    }
+
+    input[type=radio]{
+        margin-right: 10px;  
+    }
+
+    .item-plano {
+        border: 1px solid #181846;
+        
+    }
 }

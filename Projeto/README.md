@@ -26,5 +26,7 @@
 
 ## Dependencias
     - npm install --save ngx-mask
+    - npm install ngx-toastr --save
+    - npm install @angular/animations --save
     
 

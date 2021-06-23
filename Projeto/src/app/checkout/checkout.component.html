@@ -67,16 +67,16 @@
 
                 <div class="row mt-3">
                     <div class="col-md-12">
-                        <label *ngIf="plano === 'parcelado'">Número de Parcelas</label>
-                        <label *ngIf="plano === 'aVista'">Valor À Vista</label>
-                        <select *ngIf="plano === 'parcelado'" class="parcelas" formControlName="parcelamento" placeholder="Selecionar">
+                        <label *ngIf="plano === '12'">Número de Parcelas</label>
+                        <label *ngIf="plano === '1'">Valor À Vista</label>
+                        <select *ngIf="plano === '12'" class="parcelas" formControlName="parcelamento" placeholder="Selecionar">
                             <option *ngFor="let parcela of listaParcelas" [ngValue]="parcela">
                                 {{ parcela.numParcelas }} {{ parcela.valorParcela | currency: 'BRL' }}
                             </option>                          
                         </select>
-                        <select *ngIf="plano === 'aVista'" class="parcelas" formControlName="aVista" placeholder="Selecionar">                          
+                        <select *ngIf="plano === '1'" class="parcelas" formControlName="parcelamento" placeholder="Selecionar">                          
                             <option  >
-                                {{ valorAnual | currency: 'BRL'  }}
+                                {{ valorComDescontoAvista | currency: 'BRL'  }}
                             </option>
                         </select>
                     </div>

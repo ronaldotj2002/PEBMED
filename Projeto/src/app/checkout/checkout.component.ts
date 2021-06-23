@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { CheckoutService } from '../service/checkout.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-checkout',
@@ -10,11 +11,11 @@ import { CheckoutService } from '../service/checkout.service';
 })
 export class CheckoutComponent implements OnInit {
 
-  valorFinalParcelado: any;
+  valorComDescontoParcelado: any;
   listaParcelas: any;
   plano: any;
   formPagamento: any;
-  valorAnual: any;
+  valorComDescontoAvista: any;
   mensagemerro = 'Ocorreu um erro interno ao validar os dados de compra. Por favor, tente novamente.';
 
   
@@ -22,14 +23,14 @@ export class CheckoutComponent implements OnInit {
     private compraService: CheckoutService,
     private fb: FormBuilder,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private toatr: ToastrService
     ) { }
 
        
     ngOnInit() {
       this.listarPlanos()
       this.plano = this.route.snapshot.queryParams.formaPagamento;
-      console.log("FORMA PAGAMENTO", this.plano)
       
       this.formPagamento = this.fb.group({
         numCartao:          new FormControl('', [Validators.required]),
@@ -38,7 +39,7 @@ export class CheckoutComponent implements OnInit {
         nomeImpressoCartao: new FormControl('', [Validators.required]),
         cpf:                new FormControl('', [Validators.required]),
         cupom:              new FormControl(''),      
-        parcelamento:       new FormControl('', this.plano == 'aVista' ? [] : [Validators.required]),
+        parcelamento:       new FormControl('', this.plano == '1' ? [] : [Validators.required]),
       })
 
     }
@@ -48,43 +49,40 @@ export class CheckoutComponent implements OnInit {
     this.compraService.getListaPlanos().subscribe(
       
       (res: any) =>{
-        this.valorAnual = res[1].fullPrice - res[1].discountAmmount;        
-        this.valorFinalParcelado = res[0].fullPrice - res[0].discountAmmount;
+        this.valorComDescontoAvista = res[1].fullPrice - res[1].discountAmmount;        
+        this.valorComDescontoParcelado = res[0].fullPrice - res[0].discountAmmount;
 
         this.listaParcelas = [
-          { numParcelas: '1 x de', valorParcela: `${this.valorFinalParcelado / 1}` },
-          { numParcelas: '2 x de', valorParcela: `${this.valorFinalParcelado / 2}` },
-          { numParcelas: '3 x de', valorParcela: `${this.valorFinalParcelado / 3}` },
-          { numParcelas: '4 x de', valorParcela: `${this.valorFinalParcelado / 4}` }, 
-          { numParcelas: '5 x de', valorParcela: `${this.valorFinalParcelado / 5}` },
-          { numParcelas: '6 x de', valorParcela: `${this.valorFinalParcelado / 6}` },
-          { numParcelas: '7 x de', valorParcela: `${this.valorFinalParcelado / 7}` },
-          { numParcelas: '8 x de', valorParcela: `${this.valorFinalParcelado / 8}` },
-          { numParcelas: '9 x de', valorParcela: `${this.valorFinalParcelado / 9}` },
-          { numParcelas: '10 x de',valorParcela: `${this.valorFinalParcelado / 10}` }        
+          { numParcelas: '1 x de', valorParcela: `${this.valorComDescontoParcelado / 1}` },
+          { numParcelas: '2 x de', valorParcela: `${this.valorComDescontoParcelado / 2}` },
+          { numParcelas: '3 x de', valorParcela: `${this.valorComDescontoParcelado / 3}` },
+          { numParcelas: '4 x de', valorParcela: `${this.valorComDescontoParcelado / 4}` }, 
+          { numParcelas: '5 x de', valorParcela: `${this.valorComDescontoParcelado / 5}` },
+          { numParcelas: '6 x de', valorParcela: `${this.valorComDescontoParcelado / 6}` },
+          { numParcelas: '7 x de', valorParcela: `${this.valorComDescontoParcelado / 7}` },
+          { numParcelas: '8 x de', valorParcela: `${this.valorComDescontoParcelado / 8}` },
+          { numParcelas: '9 x de', valorParcela: `${this.valorComDescontoParcelado / 9}` },
+          { numParcelas: '10 x de',valorParcela: `${this.valorComDescontoParcelado / 10}` }        
         ]
              
       })
   }
 
   voltar() {
-    this.router.navigateByUrl('planos');
+    this.router.navigate(['/planos'], { queryParams: { formaPagamento: `${this.plano}`} });
   }
 
   finalizarCompra() {
     const body = this.formPagamento.getRawValue()   
-
+    const valor = this.plano == 'parcelado' ? this.valorComDescontoParcelado : this.valorComDescontoAvista
       return new Promise<void>((resolve, reject) =>  {
         this.compraService.postCompraPlano(body).subscribe(
             (res: any) =>{
-            console.log("resposta", res)
-            console.log("body", body)
-              this.router.navigateByUrl('confirmacao');
-              // this.router.navigate(['/confirmacao'], { queryParams: { dadosConfirmacao: `${body}`} })
+              this.router.navigate(['/confirmacao'], { queryParams: { formaPagamento: `${this.plano}`, cpf: `${body.cpf}`,numParcelas: `${body.parcelamento.numParcelas}`,valorParcela: `${body.parcelamento.valorParcela}`, valorTotal: `${valor}` } })
                 resolve();
             },
             (error) => {
-                this.mensagemerro
+              this.toatr.error(this.mensagemerro)                
                 console.error(error)
                 reject();
             })
