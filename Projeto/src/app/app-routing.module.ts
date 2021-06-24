@@ -5,10 +5,16 @@ import { ConfirmacaoComponent } from './confirmacao/confirmacao.component';
 import { PlanosComponent } from './planos/planos.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'planos', pathMatch: 'full' },
-  { path: 'planos', component: PlanosComponent },
-  { path: 'checkout', component: CheckoutComponent },
-  { path: 'confirmacao', component: ConfirmacaoComponent}
+  {
+    path: '', 
+    children: [
+      { path: '', redirectTo: 'planos', pathMatch: 'full' },
+      // { path: 'planos', component: PlanosComponent, data: {animationState: 'planos' } },
+      { path: 'planos', component: PlanosComponent, data: {animationState: 'planos' } },
+      { path: 'checkout', component: CheckoutComponent, data: { animationState: 'checkout' } },
+      { path: 'confirmacao', component: ConfirmacaoComponent, data: { animationState: 'confirmacao' } }
+    ]
+  }
 ];
 
 @NgModule({

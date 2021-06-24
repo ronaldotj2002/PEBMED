@@ -1,31 +1,33 @@
-import { browser, element, by, protractor } from 'protractor';
+import { browser, logging } from 'protractor';
+import { Planos } from './planos.po';
+
 
 describe('Planos', () => {
-   
-    it('Teste carregando a tela de Planos e Verificando o title', async () => { 
-    await browser.get(`${browser.baseUrl}/planos`);
-    const title = await browser.getTitle();
-    expect(title).toEqual('Projeto');
 
-    });
+    let planos: Planos;
 
-    it('Verificando se existe uma lista de Planos', async () => { 
-        await browser.get(`${browser.baseUrl}/planos`);
-        const list = element.all(by.css('.grid-planos'));
-        const listaPlanoSize = await list.count();
-        expect(listaPlanoSize).toBeGreaterThan(0);
-    
-    });
-
-    it('Rota Form', async () => {
-        await browser.get(`${browser.baseUrl}/planos`);
-        const primeiroElemento = element.all(by.css('input[type=radio]')).first();
-        await primeiroElemento.sendKeys(protractor.Key.ENTER);
-        const rotaForm = browser.params('/checkout?formaPagamento=12');
-        expect(rotaForm).toEqual('/checkout?formaPagamento=12');
-
-
+    afterEach(async () => {
+        const logs = await browser
+            .manage().logs().get(logging.Type.BROWSER);
+            expect(logs).not.toContain(jasmine.objectContaining(
+                {                
+                    level: logging.level.SEVERE 
+                } as logging.Entry))
     })
 
+    beforeEach( async () => {
+        planos = new Planos();
+        await planos.navigateTo();
+    })
+   
+    it('Verificando se existe uma lista de Planos', async () => { 
+            
+            const listaPlanos = await planos.getlistaPlanos();            
+            expect(listaPlanos).toBeGreaterThan(0);
+    
+    });
+    
+
+  
     
 });
