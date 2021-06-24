@@ -1,15 +1,13 @@
 # Projeto PEBMED
+    - Angular CLI: 12.0.5
+    - Node: 14.15.4 
+    - npm: 6.14.10    
+
+
 
 ## Rodar o projeto localmente
+    --> npm install
     --> ng serve --open 
-
-
-
-
-
-
-
-
 
 ## Componente Planos
     - ng g c planos
@@ -24,9 +22,14 @@
     - ng g s checkout
 
 
+## e2e Protractor   
+    - npm run e2e
+
 ## Dependencias
     - npm install --save ngx-mask
     - npm install ngx-toastr --save
     - npm install @angular/animations --save
+    - npm install -g protractor@7.0.0
+        - webdriver-manager update 
     
 

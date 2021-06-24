@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
-import { ActivatedRoute, Router, Params } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CheckoutService } from '../service/checkout.service';
 import { ToastrService } from 'ngx-toastr';
 
@@ -17,7 +17,7 @@ export class CheckoutComponent implements OnInit {
   formPagamento: any;
   valorComDescontoAvista: any;
   mensagemerro = 'Ocorreu um erro interno ao validar os dados de compra. Por favor, tente novamente.';
-
+ 
   
   constructor(
     private compraService: CheckoutService,
@@ -36,14 +36,14 @@ export class CheckoutComponent implements OnInit {
         numCartao:          new FormControl('', [Validators.required]),
         validade:           new FormControl('', [Validators.required]),
         cvv:                new FormControl('', [Validators.required]),
-        nomeImpressoCartao: new FormControl('', [Validators.required]),
+        nomeImpressoCartao: new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z ]*')]),
         cpf:                new FormControl('', [Validators.required]),
         cupom:              new FormControl(''),      
         parcelamento:       new FormControl('', this.plano == '1' ? [] : [Validators.required]),
       })
 
     }
-    
+  
     listarPlanos() {
       
     this.compraService.getListaPlanos().subscribe(

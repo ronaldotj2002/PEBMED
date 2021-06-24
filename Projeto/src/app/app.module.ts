@@ -10,32 +10,34 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxMaskModule } from 'ngx-mask';
 import ptBr from '@angular/common/locales/pt';
-import { registerLocaleData } from '@angular/common';
+import { CommonModule, registerLocaleData } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 registerLocaleData(ptBr);
-@NgModule({
-  declarations: [
-    AppComponent,
-    PlanosComponent,
-    CheckoutComponent,
-    ConfirmacaoComponent,
-  ],
+@NgModule({  
   imports: [
+    HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    CommonModule,
     ReactiveFormsModule,
-    HttpClientModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     NgxMaskModule.forRoot({
       dropSpecialCharacters: true
     }),
   ],
+  declarations: [
+    AppComponent,
+    PlanosComponent,
+    CheckoutComponent,
+    ConfirmacaoComponent,
+  ],
   providers: [
-    { provide: LOCALE_ID, useValue: 'pt' }
+    { provide: LOCALE_ID, useValue: 'pt' },
+
   ],
   bootstrap: [AppComponent]
 })
