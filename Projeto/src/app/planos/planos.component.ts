@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, Validators} from '@angular/forms';
 import { CheckoutService } from '../service/checkout.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-planos',
@@ -19,11 +20,13 @@ export class PlanosComponent implements OnInit {
     private fb: FormBuilder,
     private CompraService: CheckoutService,
     private router: Router,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private titleService:Title
   ) { }
  
   ngOnInit(): void {
     this.carregarPlanos();
+    this.titleService.setTitle('Planos');
   } 
 
   selecPlano = this.fb.group({

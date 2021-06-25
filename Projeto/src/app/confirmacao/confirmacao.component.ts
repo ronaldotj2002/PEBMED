@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -16,11 +17,13 @@ export class ConfirmacaoComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private titleService:Title
   ) { }
 
   ngOnInit(): void {
 
+    this.titleService.setTitle('Confirmação')
     this.formaPagamento = this.route.snapshot.queryParams.formaPagamento;    
     this.cpf = this.route.snapshot.queryParams.cpf;
     this.numParcelas = this.route.snapshot.queryParams.numParcelas;

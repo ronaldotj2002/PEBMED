@@ -1,12 +1,14 @@
 import { browser, by, element } from 'protractor'
 
 export class Planos {
+
+    static PAGE_TITLE = 'Planos';
     
     navigateTo() {
         return browser.get(`${browser.baseUrl}/planos`);
     }
 
-    getWindowTitle() {
+    getTitle() {
         return browser.getTitle();
     }
 
@@ -14,5 +16,15 @@ export class Planos {
         return element
             .all(by.css('.grid-planos'))
             .count();
+    }
+
+    fillFormaPagamentoField(number: number) {
+        return element(by.css('input[formcontrolname=formaPagamento]:checked'))
+        .sendKeys(number)
+    }
+
+    comprar() {
+        return element(by.css('button[type=button]'))
+        .click()
     }
 }

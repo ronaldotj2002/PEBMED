@@ -9,7 +9,7 @@ import { routerTransitionAnimations } from './route-transition-animations';
   animations: [routerTransitionAnimations]
 })
 export class AppComponent {
-  title = 'Projeto';
+
 
   prepareRoute(outlet: RouterOutlet) {
     return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animationState'];

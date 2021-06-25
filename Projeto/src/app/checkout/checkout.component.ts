@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CheckoutService } from '../service/checkout.service';
 import { ToastrService } from 'ngx-toastr';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-checkout',
@@ -24,11 +25,13 @@ export class CheckoutComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
-    private toatr: ToastrService
+    private toatr: ToastrService,
+    private titleService:Title
     ) { }
 
        
     ngOnInit() {
+      this.titleService.setTitle('Checkout');
       this.listarPlanos()
       this.plano = this.route.snapshot.queryParams.formaPagamento;
       
@@ -68,6 +71,7 @@ export class CheckoutComponent implements OnInit {
       })
   }
 
+ 
   voltar() {
     this.router.navigate(['/planos'], { queryParams: { formaPagamento: `${this.plano}`} });
   }

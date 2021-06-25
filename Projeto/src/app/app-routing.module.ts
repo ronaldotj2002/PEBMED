@@ -10,7 +10,7 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'planos', pathMatch: 'full' },
       // { path: 'planos', component: PlanosComponent, data: {animationState: 'planos' } },
-      { path: 'planos', component: PlanosComponent, data: {animationState: 'planos' } },
+      { path: 'planos', component: PlanosComponent, data: {animationState: 'planos', title: 'Planos'} },
       { path: 'checkout', component: CheckoutComponent, data: { animationState: 'checkout' } },
       { path: 'confirmacao', component: ConfirmacaoComponent, data: { animationState: 'confirmacao' } }
     ]
